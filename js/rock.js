@@ -8,9 +8,6 @@ function getComputerChoice() {
 
 // play one game of rock-paper-scissors
 function playRound(playerSelection, computerSelection) {
-    console.log("player choice: ", playerSelection);
-    console.log("computer choice: ", computerSelection);
-
     playerSelection = playerSelection.toLowerCase();
 
     if (playerSelection === computerSelection) {
@@ -42,8 +39,20 @@ function game() {
 // Adding eventListener to all buttons, and get user input from it
 const buttons = document.querySelectorAll("button");
 
+const resultDiv = document.querySelector(".resultDiv");
+
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
-        console.log(playRound(button.id, getComputerChoice()));
+        let computerChoice = getComputerChoice();
+        let winner = playRound(button.id, computerChoice);
+
+        let p = document.createElement("p");
+        p.textContent = 
+        `Your choice is: ${button.id},
+         Computer's choice is ${computerChoice},
+         ${winner}`
+
+        resultDiv.appendChild(p);
     });
 });
+
