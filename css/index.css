@@ -1,0 +1,8 @@
+.score {
+    display: flex;
+    gap: 20px;
+}
+
+.userBottom,.computerBottom {
+    text-align: center;
+}
