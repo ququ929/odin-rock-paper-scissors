@@ -26,16 +26,6 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// play the game 5 times, with user input.
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Rock, Paper or Scissors? ")
-        let computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
-    }
-}
-
-
 // Adding eventListener to all buttons, and get user input from it
 const buttons = document.querySelectorAll("button");
 
@@ -55,4 +45,3 @@ buttons.forEach((button) => {
         resultDiv.appendChild(p);
     });
 });
-
