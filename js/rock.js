@@ -26,22 +26,27 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+
+// print winner of the game depend on button click
+function printWinner(e) {
+    playerChoice = e.path[0].id;
+    computerChoice = getComputerChoice();
+    winner = playRound(playerChoice, computerChoice);
+    
+    const whoWinPara = document.createElement("p");
+    whoWinPara.textContent = 
+    `${winner} your choice is ${playerChoice},
+        computer choice is ${computerChoice}`;
+    
+        resultDiv.appendChild(whoWinPara);
+}
+
+
 // Adding eventListener to all buttons, and get user input from it
 const buttons = document.querySelectorAll("button");
 
 const resultDiv = document.querySelector(".resultDiv");
 
 buttons.forEach((button) => {
-    button.addEventListener("click", () => {
-        let computerChoice = getComputerChoice();
-        let winner = playRound(button.id, computerChoice);
-
-        let p = document.createElement("p");
-        p.textContent = 
-        `Your choice is: ${button.id},
-         Computer's choice is ${computerChoice},
-         ${winner}`
-
-        resultDiv.appendChild(p);
-    });
+    button.addEventListener("click", printWinner);
 });
