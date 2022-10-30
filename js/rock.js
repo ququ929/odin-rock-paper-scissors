@@ -27,9 +27,9 @@ function playRound(playerSelection, computerSelection) {
 }
 
 
-// print winner of the game depend on button click
+// print score and winner of single game depend on button click
 function printWinner(e) {
-    playerChoice = e.path[0].id;
+    playerChoice = e.composedPath()[0].id;
     computerChoice = getComputerChoice();
     winner = playRound(playerChoice, computerChoice);
     
@@ -38,8 +38,26 @@ function printWinner(e) {
     `${winner} your choice is ${playerChoice},
         computer choice is ${computerChoice}`;
     
-        resultDiv.appendChild(whoWinPara);
+    resultDiv.appendChild(whoWinPara);
 }
+
+// +1 score in winner's div
+function printScore () {
+    if (winner === "You win!") {
+        playerScore = +playerScore + 1;
+        playerScoreDiv.textContent = playerScore;
+        console.log(playerScore, winner);
+    }
+
+    else if (winner === "You lose!") {
+        computerScore = +computerScore + 1;
+        computerScoreDiv.textContent = computerScore;
+    }
+}
+    
+// when one of which reach score 5, stop the game
+
+
 
 
 // Adding eventListener to all buttons, and get user input from it
@@ -47,6 +65,19 @@ const buttons = document.querySelectorAll("button");
 
 const resultDiv = document.querySelector(".resultDiv");
 
+const playerScoreDiv = document.querySelector(".userBottom");
+let playerScore = playerScoreDiv.textContent;
+
+const computerScoreDiv = document.querySelector(".computerBottom")
+let computerScore = computerScoreDiv.textContent;
+
 buttons.forEach((button) => {
-    button.addEventListener("click", printWinner);
+    button.addEventListener("click", (e) => {
+        printWinner(e);
+        printScore();
+    });
 });
+
+if (playerScore === 5) {
+    console.log("Game over");
+}
