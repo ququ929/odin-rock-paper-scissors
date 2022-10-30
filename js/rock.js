@@ -46,7 +46,6 @@ function printScore () {
     if (winner === "You win!") {
         playerScore = +playerScore + 1;
         playerScoreDiv.textContent = playerScore;
-        console.log(playerScore, winner);
     }
 
     else if (winner === "You lose!") {
@@ -55,10 +54,32 @@ function printScore () {
     }
 }
     
-// when one of which reach score 5, stop the game
+// print final winner with score 5
+function finalWinner() {
+    const gameOverPara = document.createElement("p");
 
+    if (computerScore === 5) {
+        gameOverPara.textContent = "The final winner is computer!"
+        resultDiv.appendChild(gameOverPara);
+    }
 
+    else if (playerScore === 5) {
+        gameOverPara.textContent = "The final winner is Human!"
+        resultDiv.appendChild(gameOverPara);
+    }
+}
 
+// function package
+function allInOne (e) {
+    printWinner(e);
+    printScore();
+    finalWinner();
+
+    // remove eventlistener when scores reach 5
+    if (computerScore >= 5 || playerScore >= 5) {
+        buttons.forEach((button) => button.removeEventListener("click", allInOne));
+    }
+}
 
 // Adding eventListener to all buttons, and get user input from it
 const buttons = document.querySelectorAll("button");
@@ -72,12 +93,6 @@ const computerScoreDiv = document.querySelector(".computerBottom")
 let computerScore = computerScoreDiv.textContent;
 
 buttons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-        printWinner(e);
-        printScore();
-    });
+    button.addEventListener("click", allInOne)
 });
 
-if (playerScore === 5) {
-    console.log("Game over");
-}
