@@ -76,6 +76,7 @@ function allInOne (e) {
     finalWinner();
 
     // remove eventlistener when scores reach 5
+    // removeEventListener only work on named function!!!
     if (computerScore >= 5 || playerScore >= 5) {
         buttons.forEach((button) => button.removeEventListener("click", allInOne));
     }
